@@ -127,8 +127,11 @@ Lần setup đầu sẽ tạo 10 sản phẩm xe trải đều 5 danh mục, 4 b
 
 Để xóa sản phẩm, bài viết và ảnh mẫu, chạy lệnh chủ động:
 
-    # Xóa các record được đánh dấu demo; giữ lại trang chính, menu và danh mục xe.
-    wp eval-file scripts/remove-demo-content.php
+    # Docker: chạy WP-CLI trong container setup và xóa các record demo.
+    docker compose run --rm --entrypoint wp setup eval-file /project/scripts/remove-demo-content.php --allow-root
+
+    # Laragon/XAMPP: dùng WP-CLI đã cài và chỉ định đường dẫn WordPress + script trong repository.
+    php $wpCli --path="$wpRoot" eval-file "$repo\scripts\remove-demo-content.php"
 
 Cleanup chỉ làm trống nội dung trang nếu nội dung vẫn trùng với bản demo đã seed, tránh xóa chỉnh sửa thủ công. Không public website khi chưa thay nội dung, hình ảnh và thông tin đại lý bằng dữ liệu đã xác minh.
 
