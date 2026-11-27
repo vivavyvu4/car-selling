@@ -1,0 +1,21 @@
+# Local environment
+.env
+.env.*
+!.env.example
+# WordPress runtime and uploads
+wordpress/
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+# Local backups
+*.sql
+*.sql.gz
+*.dump
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+.phpunit.cache/
+coverage/
