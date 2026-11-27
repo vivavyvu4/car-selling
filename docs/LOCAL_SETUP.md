@@ -170,7 +170,10 @@ Bây giờ chạy các lệnh cài đặt. Giữ nguyên hai biến $wpCli và $
 
     # Chạy script seed-site.php của repository.
     # Script tạo trang chủ, trang xe, tin tức, liên hệ, chính sách và danh mục xe.
-    # Script có thể chạy lại để bổ sung nội dung thiếu; nó không tạo xe demo.
+    # Script có thể chạy lại để bổ sung nội dung thiếu; tạo 10 xe demo, 4 bài viết, ảnh vector, menu và trang nội dung mẫu.
+    php $wpCli --path="$wpRoot" eval-file "$repo\scripts\seed-site.php"
+
+    # Có thể chạy lại script seed để bổ sung record demo còn thiếu mà không nhân bản sản phẩm/bài viết.
     php $wpCli --path="$wpRoot" eval-file "$repo\scripts\seed-site.php"
 
     # Thiết lập permalink dạng /ten-bai-viet/ và cập nhật rewrite rules.
@@ -303,3 +306,13 @@ Bạn cần copy lại thư mục plugin/theme từ repository sang WordPress in
 - Không tái sử dụng mật khẩu local cho production.
 - Không đưa wp-config.php, database dump, file upload hoặc secrets vào Git.
 - Trước khi chạy website thật, cần cấu hình HTTPS, SMTP, backup và chính sách quyền riêng tư.
+
+
+### Xóa dữ liệu DEMO trước khi nhập catalog thật
+
+    # Xóa các sản phẩm/bài viết còn được đánh dấu demo và ảnh demo trong Media Library.
+    # Các trang lõi, menu và danh mục xe được giữ lại.
+    # Nội dung trang chỉ được làm trống nếu vẫn trùng với bản demo seed, không đụng vào phần đã sửa tay.
+    php $wpCli --path="$wpRoot" eval-file "$repo\scripts\remove-demo-content.php"
+
+Lưu ý: cleanup có tính phá hủy đối với record còn mang marker DEMO. Nếu đã chỉnh sửa một sản phẩm demo thành dữ liệu thật, hãy sao lưu/tạo bản mới trước khi chạy lệnh.

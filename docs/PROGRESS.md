@@ -66,3 +66,19 @@ Commit tiếp theo sẽ chạy lại GitHub Actions cho các thay đổi mới.
 - Dealer Starter là theme mặc định để clone repo có thể chạy không cần license Flatsome.
 - Dealer Sales và Shop Manager hiện xem được toàn bộ lead; chưa có phân lead theo từng nhân viên.
 - Chưa tạo sản phẩm hoặc giá giả.
+
+
+## 2026-11-27 — Commit 5: Bộ dữ liệu DEMO toàn website
+- Seed 10 sản phẩm xe mẫu trải đều 5 danh mục, 4 thương hiệu hư cấu.
+- Seed 4 bài viết và các danh mục tin tức.
+- Tạo/nâng cấp trang Giới thiệu, Liên hệ và mẫu Chính sách bảo mật.
+- Tạo menu chính và gán ảnh đại diện cho sản phẩm, danh mục, bài viết.
+- Thêm 5 ảnh vector xe theo nhóm và 1 ảnh hero đội xe; seed vào Media Library.
+- Thêm banner DEMO MODE, cảnh báo trên nội dung sản phẩm/bài viết; không điền hotline/email/Zalo/địa chỉ giả, giá bán không hiển thị.
+- Bổ sung layout trang chủ, trang tin tức, CSS responsive và script remove-demo-content.php.
+
+### Kiểm thử và giới hạn
+- GitHub Actions sẽ chạy lại trên commit này để kiểm tra cú pháp PHP/JavaScript/shell và Docker Compose.
+- Chưa có Docker daemon để chạy WordPress/WooCommerce end-to-end; chưa kiểm thử Laragon/XAMPP hoặc giao diện trình duyệt.
+- Ảnh trong repo là vector minh họa, không phải ảnh chụp xe thật.
+- Chính sách bảo mật là mẫu nội dung, cần rà soát trước khi thu thập dữ liệu thật.

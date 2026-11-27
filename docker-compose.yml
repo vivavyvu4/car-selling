@@ -70,7 +70,7 @@ services:
       echo "Activating dealer modules..."
       wp plugin activate dealer-site-core --allow-root
       wp theme activate dealer-starter --allow-root
-      echo "Seeding starter pages..."
+      echo "Seeding site pages, demo products, news and images..."
       wp eval-file /project/scripts/seed-site.php --allow-root
       wp language core install vi --activate --allow-root || true
       wp rewrite structure '/%postname%/' --hard --allow-root

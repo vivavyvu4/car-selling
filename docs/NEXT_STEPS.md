@@ -41,3 +41,10 @@
 - Phân lead tự động theo chi nhánh/nhân viên.
 - Zalo OA/API hoặc tổng đài.
 - Đa ngôn ngữ.
+
+
+## Ưu tiên 0 — Kiểm thử bộ dữ liệu DEMO
+1. Chạy seed và xác nhận 10 sản phẩm, 5 danh mục, 4 thương hiệu, 4 bài viết, menu và ảnh trong Media Library.
+2. Mở trang chủ, danh sách/chi tiết xe, trang tin tức/bài viết, Giới thiệu, Liên hệ và Chính sách bảo mật.
+3. Kiểm tra banner DEMO MODE và form báo giá lưu lead.
+4. Trước khi nhập catalog thật, sao lưu rồi chạy scripts/remove-demo-content.php để dọn record có marker demo. Script giữ trang lõi, menu và danh mục xe.

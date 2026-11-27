@@ -39,3 +39,12 @@ MVP lưu lead trong WordPress để giảm dịch vụ cần cấu hình. Có th
 
 ## 9. Bảo mật
 Không commit secrets. Production bắt buộc HTTPS, backup và cập nhật thường xuyên. Form có validate, consent, honeypot và rate limit. Cần chính sách quyền riêng tư trước khi thu lead thật.
+
+
+## Demo content
+- Dữ liệu demo được tạo bằng WP-CLI; không commit database dump hoặc uploads.
+- Seed đánh dấu sản phẩm/bài viết/ảnh để chạy lại không tạo bản trùng.
+- Sản phẩm dùng giá 0 nội bộ và display mode “Liên hệ báo giá”; giá không hiển thị ra khách.
+- SVG vector được lưu trong theme, copy vào Media Library khi seed.
+- Không điền thông tin liên hệ giả; chính sách bảo mật hiển thị rõ là nội dung mẫu.
+- remove-demo-content.php chỉ xóa record có marker demo; nội dung trang chỉ làm trống nếu hash vẫn khớp bản seed.

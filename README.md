@@ -119,6 +119,19 @@ Dùng Laragon hoặc XAMPP để chạy Apache, PHP và MySQL/MariaDB trực ti�
 
 Xem hướng dẫn từng bước và các lệnh PowerShell có comment tại docs/LOCAL_SETUP.md.
 
+## Bộ dữ liệu DEMO có sẵn
+
+Lần setup đầu sẽ tạo 10 sản phẩm xe trải đều 5 danh mục, 4 bài viết, trang Giới thiệu/Liên hệ/Chính sách, menu và ảnh minh họa. Tên xe, thương hiệu, model và thông số đều hư cấu; giá hiển thị ở chế độ “Liên hệ báo giá”, không tạo giá bán giả. Không có hotline, email, Zalo hoặc địa chỉ giả trong cấu hình đại lý.
+
+Ảnh xe là vector SVG minh họa được lưu trong theme tại wp-content/themes/dealer-starter/assets/demo-vehicles và được seed vào Media Library. Header hiển thị DEMO MODE cho đến khi dữ liệu mẫu được gỡ.
+
+Để xóa sản phẩm, bài viết và ảnh mẫu, chạy lệnh chủ động:
+
+    # Xóa các record được đánh dấu demo; giữ lại trang chính, menu và danh mục xe.
+    wp eval-file scripts/remove-demo-content.php
+
+Cleanup chỉ làm trống nội dung trang nếu nội dung vẫn trùng với bản demo đã seed, tránh xóa chỉnh sửa thủ công. Không public website khi chưa thay nội dung, hình ảnh và thông tin đại lý bằng dữ liệu đã xác minh.
+
 ## Thành phần
 - WordPress image PHP 8.3 + Apache (Docker mode).
 - MariaDB 11.4 (Docker mode).
