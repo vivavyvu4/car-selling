@@ -84,3 +84,5 @@ Commit tiếp theo sẽ chạy lại GitHub Actions cho các thay đổi mới.
 - Chính sách bảo mật là mẫu nội dung, cần rà soát trước khi thu thập dữ liệu thật.
 
 - Bổ sung template riêng cho trang nội dung và trang chi tiết bài viết để không phụ thuộc index fallback.
+
+- Điều chỉnh seed trang: khi chạy lại, chỉ cập nhật trang demo nếu nội dung vẫn khớp hash lần seed trước; giữ nguyên chỉnh sửa thủ công.

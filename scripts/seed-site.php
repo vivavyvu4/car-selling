@@ -26,7 +26,14 @@ function dealer_demo_image_id(string $file): int {
 }
 function dealer_demo_page(array $p,array $legacy=array()): int {
     $old=get_page_by_path($p['slug'],OBJECT,'page');$new=!($old instanceof WP_Post);
-    if(!$new&&!get_post_meta($old->ID,'_dealer_demo_page_seeded',true)&&trim((string)$old->post_content)!==''&&!in_array((string)$old->post_content,$legacy,true))return (int)$old->ID;
+    if(!$new){
+        $current=(string)$old->post_content;
+        $seeded=(bool)get_post_meta($old->ID,'_dealer_demo_page_seeded',true);
+        $previous_hash=(string)get_post_meta($old->ID,'_dealer_demo_page_hash',true);
+        $unchanged_seed=$seeded&&$previous_hash!==''&&hash_equals($previous_hash,hash('sha256',$current));
+        $untouched_legacy=trim($current)===''||in_array($current,$legacy,true);
+        if(!$unchanged_seed&&!$untouched_legacy)return (int)$old->ID;
+    }
     $data=array('post_type'=>'page','post_status'=>'publish','post_title'=>$p['title'],'post_name'=>$p['slug'],'post_content'=>$p['content']);
     if($new)$id=wp_insert_post($data,true);else{$data['ID']=$old->ID;$id=wp_update_post($data,true);}
     if(is_wp_error($id)){WP_CLI::warning($id->get_error_message());return 0;}
