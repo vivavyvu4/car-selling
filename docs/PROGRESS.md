@@ -29,6 +29,16 @@
 - Bổ sung edit_private_dealer_leads cho Administrator, Shop Manager và Dealer Sales để nhân viên có thể mở/sửa lead private do form công khai tạo.
 - Cập nhật plugin version 0.2.2.
 
+## 2026-11-27 — Commit 4: Hướng dẫn cài đặt có chú thích và local non-Docker
+- Làm rõ Copy-Item .env.example .env tạo file .env ngay tại repository root, cùng cấp với docker-compose.yml; không tạo file ở thư mục WordPress.
+- Ghi rõ .env chỉ dành cho Docker Compose; local Laragon/XAMPP dùng wp-config.php, không cần .env.
+- Tạo docs/LOCAL_SETUP.md với hướng dẫn Windows Laragon Quick App và XAMPP.
+- Phân biệt repository source (C:\projects\car-selling) và WordPress core folder (C:\laragon\www\car-selling-local).
+- Thêm hướng dẫn copy plugin/theme, cài WP-CLI, cài WooCommerce/Rank Math, chạy seed script và cập nhật source sau git pull.
+- Bổ sung comment giải thích cho từng lệnh PowerShell và Docker trong README.
+- Bổ sung index.php fallback cho Dealer Starter để theme có template index cần thiết khi kích hoạt.
+- Ghi rõ yêu cầu PHP/database và các bước kiểm tra version local.
+
 ## Kiểm tra tự động
 GitHub Actions run cho commit 9de542f0509f99935ef839be2235cb34b7128e88 đã hoàn tất thành công:
 - PHP syntax: success.
@@ -38,9 +48,12 @@ GitHub Actions run cho commit 9de542f0509f99935ef839be2235cb34b7128e88 đã hoà
 
 Run: https://github.com/vivavyvu4/car-selling/actions/runs/45956996925
 
+Commit tiếp theo sẽ chạy lại GitHub Actions cho các thay đổi mới.
+
 ## Chưa kiểm chứng
 - Môi trường agent không có Docker daemon nên chưa chạy được WordPress stack end-to-end.
 - Chưa integration test trên WordPress/WooCommerce thật.
+- Chưa kiểm thử Laragon/XAMPP trực tiếp trên máy Windows.
 - Chưa kiểm thử trình duyệt, email SMTP, backup/restore hoặc SEO structured data trên domain production.
 
 ## Dữ liệu / cấu hình còn thiếu

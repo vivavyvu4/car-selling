@@ -1,15 +1,13 @@
 # Việc tiếp theo
 
 ## Ưu tiên 1 — Chạy và kiểm thử local
-1. Cài và mở Docker Desktop.
-2. Clone repo và chạy scripts/start.sh hoặc scripts/start.ps1.
-3. Theo dõi docker compose logs -f setup đến khi setup hoàn tất.
-4. Truy cập http://localhost:8080 và /wp-admin.
-5. Kiểm tra WooCommerce, Dealer Site Core, Dealer Starter và Rank Math đã active.
-6. Tạo một sản phẩm thử nội bộ (không public) và kiểm tra thương hiệu, ảnh, thông số, giá và trang chi tiết.
-7. Gửi form thử, kiểm tra lead, trạng thái, ghi chú và UTM.
-8. Kiểm tra tài khoản Administrator, Dealer Sales và Shop Manager.
-9. Cấu hình SMTP rồi kiểm tra email thông báo.
+1. Chọn một trong hai cách: Docker theo README hoặc Laragon/XAMPP theo docs/LOCAL_SETUP.md.
+2. Kiểm tra WordPress, WooCommerce, Dealer Site Core, Dealer Starter và Rank Math đã active.
+3. Tạo một sản phẩm thử nội bộ (không public) và kiểm tra thương hiệu, ảnh, thông số, giá và trang chi tiết.
+4. Gửi form thử, kiểm tra lead, trạng thái, ghi chú và UTM.
+5. Kiểm tra tài khoản Administrator, Dealer Sales và Shop Manager.
+6. Cấu hình SMTP rồi kiểm tra email thông báo.
+7. Ghi lại lỗi theo môi trường cụ thể (Docker hay Laragon/XAMPP).
 
 ## Ưu tiên 2 — Hoàn thiện trải nghiệm sale
 1. Rút gọn màn hình thêm sản phẩm.
