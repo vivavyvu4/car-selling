@@ -13,10 +13,20 @@ Plugin riêng giữ nghiệp vụ đại lý: thương hiệu, thông tin xe, th
 Theme tự xây nhẹ dùng local và có thể dùng production. Flatsome là lựa chọn bổ sung khi đại lý có license; không commit parent theme thương mại.
 
 ## 5. Docker Compose + WP-CLI
-PHP 8.3 / Apache, MariaDB 11.4, WP-CLI cài WordPress, WooCommerce, Rank Math và nội dung cơ bản. Named volumes giữ database và runtime; custom plugin/theme mount từ repo.
+- PHP 8.3 / Apache.
+- MariaDB 11.4.
+- WP-CLI cài WordPress, WooCommerce, Rank Math và seed nội dung cơ bản.
+- Named volumes giữ database và runtime; custom plugin/theme mount từ repo.
+- scripts/start.sh và .ps1 là entrypoint cho máy dev.
 
 ## 6. CRM
 MVP lưu lead trong WordPress để giảm dịch vụ cần cấu hình. Có thể tích hợp HubSpot khi cần automation hoặc pipeline nâng cao.
 
-## 7. Bảo mật
-Không commit secrets. Production bắt buộc HTTPS, backup và cập nhật. Form có validate, consent, honeypot và rate limit. Cần chính sách quyền riêng tư trước khi thu lead thật.
+## 7. Phân quyền
+- Administrator quản lý toàn website.
+- Dealer Sales kế thừa capability của WooCommerce Shop Manager, thêm quyền lead.
+- Shop Manager cũng được cấp quyền lead.
+- Cả Dealer Sales và Shop Manager hiện xem được toàn bộ lead; chưa có ownership/assignment filter.
+
+## 8. Bảo mật
+Không commit secrets. Production bắt buộc HTTPS, backup và cập nhật thường xuyên. Form có validate, consent, honeypot và rate limit. Cần chính sách quyền riêng tư trước khi thu lead thật.

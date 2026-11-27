@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Dealer Site Core
  * Description: Vehicle catalog fields, dealership settings and quote-lead inbox.
- * Version: 0.2.0
+ * Version: 0.2.1
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Text Domain: dealer-site-core
@@ -10,7 +10,8 @@
 if (! defined('ABSPATH')) {
     exit;
 }
-define('DEALER_SITE_CORE_VERSION', '0.2.0');
+
+define('DEALER_SITE_CORE_VERSION', '0.2.1');
 define('DEALER_SITE_CORE_PATH', plugin_dir_path(__FILE__));
 define('DEALER_SITE_CORE_URL', plugin_dir_url(__FILE__));
 
@@ -21,6 +22,7 @@ require_once DEALER_SITE_CORE_PATH . 'includes/class-dealer-leads.php';
 add_action('init', array('Dealer_Products', 'register_brand_taxonomy'));
 add_action('init', array('Dealer_Leads', 'register_post_type'));
 add_action('admin_init', array('Dealer_Settings', 'register_settings'));
+add_action('admin_init', 'dealer_site_core_sync_roles');
 add_action('admin_menu', array('Dealer_Settings', 'register_menu'));
 
 if (class_exists('WooCommerce')) {
@@ -46,30 +48,62 @@ add_action('manage_dealer_lead_posts_custom_column', array('Dealer_Leads', 'rend
 add_shortcode('dealer_quote_form', array('Dealer_Leads', 'render_form'));
 add_shortcode('dealer_contact_buttons', array('Dealer_Settings', 'contact_buttons'));
 
+/**
+ * Give administrators and WooCommerce shop managers access to lead records.
+ * Dealer Sales inherits Shop Manager capabilities but not manage_options.
+ */
+function dealer_site_core_sync_roles(): void {
+    $lead_caps = array(
+        'read_dealer_lead',
+        'edit_dealer_lead',
+        'edit_dealer_leads',
+        'edit_others_dealer_leads',
+        'edit_published_dealer_leads',
+        'read_private_dealer_leads',
+        'publish_dealer_leads',
+        'delete_dealer_lead',
+        'delete_dealer_leads',
+        'delete_others_dealer_leads',
+        'delete_private_dealer_leads',
+        'delete_published_dealer_leads',
+    );
+
+    foreach (array('administrator', 'shop_manager') as $role_name) {
+        $role = get_role($role_name);
+        if ($role) {
+            foreach ($lead_caps as $capability) {
+                $role->add_cap($capability);
+            }
+        }
+    }
+
+    $shop_manager = get_role('shop_manager');
+    if (! $shop_manager) {
+        return;
+    }
+
+    $sales_role = get_role('dealer_sales');
+    if (! $sales_role) {
+        add_role('dealer_sales', __('Nhân viên sale', 'dealer-site-core'), $shop_manager->capabilities);
+        $sales_role = get_role('dealer_sales');
+    }
+
+    if ($sales_role) {
+        foreach ($shop_manager->capabilities as $capability => $granted) {
+            if ($granted) {
+                $sales_role->add_cap($capability);
+            }
+        }
+        foreach ($lead_caps as $capability) {
+            $sales_role->add_cap($capability);
+        }
+    }
+}
+
 register_activation_hook(__FILE__, static function (): void {
     Dealer_Leads::register_post_type();
     Dealer_Products::register_brand_taxonomy();
-    $caps = array(
-        'read_dealer_lead', 'edit_dealer_lead', 'edit_dealer_leads',
-        'edit_others_dealer_leads', 'edit_published_dealer_leads',
-        'read_private_dealer_leads', 'publish_dealer_leads',
-        'delete_dealer_lead', 'delete_dealer_leads', 'delete_others_dealer_leads',
-        'delete_private_dealer_leads', 'delete_published_dealer_leads',
-    );
-    $admin = get_role('administrator');
-    if ($admin) {
-        foreach ($caps as $cap) {
-            $admin->add_cap($cap);
-        }
-    }
-    $sales = get_role('dealer_sales');
-    if (! $sales) {
-        add_role('dealer_sales', 'Dealer Sales', array_merge(array('read' => true), $caps));
-    } else {
-        foreach ($caps as $cap) {
-            $sales->add_cap($cap);
-        }
-    }
+    dealer_site_core_sync_roles();
     flush_rewrite_rules();
 });
 register_deactivation_hook(__FILE__, static function (): void {

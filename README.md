@@ -3,27 +3,27 @@
 Website marketing/catalog cho đại lý ô tô đa thương hiệu, xây trên WordPress + WooCommerce. Repository chứa custom plugin, theme, Docker Compose và tài liệu local.
 
 ## Chạy local
+
 Yêu cầu: Docker Desktop đang chạy, Docker Compose v2 và Git.
 
 ### Windows
-Mở PowerShell tại thư mục repo và chạy:
-    
+Mở PowerShell tại thư mục repository:
+
     .\scripts\start.ps1
 
 ### macOS / Linux
 
-    chmod +x scripts/start.sh
     ./scripts/start.sh
 
-Lần đầu, script tạo .env từ .env.example. Docker Compose tự khởi động MariaDB/WordPress, cài WordPress, WooCommerce, Rank Math, kích hoạt Dealer Site Core và Dealer Starter, rồi tạo trang và danh mục xe cơ bản.
+Lần chạy đầu, script tạo .env từ .env.example. Docker Compose tự khởi động MariaDB và WordPress, cài WordPress, WooCommerce, Rank Math SEO, kích hoạt Dealer Site Core và Dealer Starter, rồi tạo trang và danh mục xe cơ bản.
 
 Mặc định:
 - Website: http://localhost:8080
 - Admin: http://localhost:8080/wp-admin
 - Username: dealeradmin
-- Password: xem WP_ADMIN_PASSWORD trong .env local.
+- Password: xem WP_ADMIN_PASSWORD trong file .env local.
 
-Chỉ dùng mật khẩu .env cho local; không dùng trên production.
+Chỉ dùng mật khẩu .env cho local. Đổi mật khẩu trước khi chia sẻ máy hoặc triển khai production.
 
 Theo dõi cài đặt lần đầu:
 
@@ -50,7 +50,7 @@ Lệnh down -v xóa dữ liệu vĩnh viễn nếu chưa backup.
 - WooCommerce quản lý catalog, danh mục, thuộc tính và ảnh.
 - Rank Math SEO quản lý metadata, sitemap và schema.
 - Dealer Site Core chứa chức năng riêng của đại lý.
-- Dealer Starter là theme responsive không cần license thương mại.
+- Dealer Starter là theme responsive, không cần license thương mại.
 
 ## Quản trị sản phẩm
 Vào Sản phẩm → Thêm mới:
@@ -63,6 +63,16 @@ Vào Sản phẩm → Thêm mới:
 7. Chọn cách hiển thị giá: liên hệ, giá từ hoặc giá cụ thể.
 8. Lưu nháp, xem trước và xuất bản sau khi xác minh dữ liệu.
 
+Không cần nhập thông số không áp dụng cho mẫu xe.
+
+## Người dùng và phân quyền
+- Administrator: toàn quyền website và cấu hình đại lý.
+- Dealer Sales: có quyền quản lý sản phẩm và lead, không có quyền cài plugin hoặc thay đổi cấu hình toàn website.
+- WooCommerce Shop Manager: cũng được cấp quyền truy cập lead.
+- Tạo người dùng tại Users → Add New và chọn role phù hợp.
+
+Hiện tại Dealer Sales và Shop Manager có thể xem toàn bộ lead. Phân lead theo từng nhân viên chưa nằm trong MVP.
+
 ## Nhận yêu cầu báo giá
 - Shortcode [dealer_quote_form] hiển thị form; trên trang sản phẩm tự nhận sản phẩm hiện tại.
 - Shortcode [dealer_contact_buttons] hiển thị hotline, Zalo và email.
@@ -71,10 +81,12 @@ Vào Sản phẩm → Thêm mới:
 - Email dùng wp_mail; cần cấu hình SMTP trước production.
 
 ## Cấu hình đại lý
-Vào Dealer Website → Cấu hình đại lý để nhập tên, hotline, link Zalo, email nhận lead và địa chỉ. Không public website khi thông tin đại lý, thông số hoặc giá chưa xác minh.
+Vào Dealer Website → Cấu hình đại lý để nhập tên, hotline, link Zalo, email nhận lead và địa chỉ. Chỉ Administrator được sửa phần cấu hình này.
+
+Không public website khi thông tin đại lý, thông số hoặc giá chưa xác minh.
 
 ## Flatsome (tùy chọn)
-Local mặc định dùng Dealer Starter nên không cần license Flatsome để chạy. Nếu đại lý có license, có thể cài parent theme Flatsome riêng và xây child theme tương ứng. Không commit parent theme thương mại vào Git.
+Local mặc định dùng Dealer Starter nên không cần license Flatsome để chạy. Nếu đại lý có license, có thể cài parent theme Flatsome riêng và phát triển child theme tương ứng. Không commit theme thương mại vào Git.
 
 ## SEO/marketing trước khi public
 Cấu hình Site Title, logo, favicon, Rank Math, sitemap, canonical, schema; viết nội dung riêng cho từng xe và danh mục; tối ưu ảnh/ALT; kết nối Search Console, GA4, GTM; kiểm tra UTM, sự kiện gửi form, mobile, structured data và chính sách quyền riêng tư. Xác minh quyền sử dụng ảnh, thông số và tên thương hiệu.
