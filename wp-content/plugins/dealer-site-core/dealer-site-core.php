@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Dealer Site Core
  * Description: Vehicle catalog fields, dealership settings and quote-lead inbox.
- * Version: 0.2.1
+ * Version: 0.2.2
  * Requires at least: 6.5
  * Requires PHP: 8.1
  * Text Domain: dealer-site-core
@@ -11,7 +11,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('DEALER_SITE_CORE_VERSION', '0.2.1');
+define('DEALER_SITE_CORE_VERSION', '0.2.2');
 define('DEALER_SITE_CORE_PATH', plugin_dir_path(__FILE__));
 define('DEALER_SITE_CORE_URL', plugin_dir_url(__FILE__));
 
@@ -58,6 +58,7 @@ function dealer_site_core_sync_roles(): void {
         'edit_dealer_lead',
         'edit_dealer_leads',
         'edit_others_dealer_leads',
+        'edit_private_dealer_leads',
         'edit_published_dealer_leads',
         'read_private_dealer_leads',
         'publish_dealer_leads',
