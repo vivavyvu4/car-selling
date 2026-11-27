@@ -17,7 +17,7 @@ Theme tự xây nhẹ dùng local và có thể dùng production. Flatsome là l
 - MariaDB 11.4.
 - WP-CLI cài WordPress, WooCommerce, Rank Math và seed nội dung cơ bản.
 - Named volumes giữ database và runtime; custom plugin/theme mount từ repo.
-- scripts/start.sh và .ps1 là entrypoint cho máy dev.
+- scripts/start.sh và scripts/start.ps1 là entrypoint cho máy dev.
 
 ## 6. CRM
 MVP lưu lead trong WordPress để giảm dịch vụ cần cấu hình. Có thể tích hợp HubSpot khi cần automation hoặc pipeline nâng cao.
@@ -26,7 +26,8 @@ MVP lưu lead trong WordPress để giảm dịch vụ cần cấu hình. Có th
 - Administrator quản lý toàn website.
 - Dealer Sales kế thừa capability của WooCommerce Shop Manager, thêm quyền lead.
 - Shop Manager cũng được cấp quyền lead.
-- Cả Dealer Sales và Shop Manager hiện xem được toàn bộ lead; chưa có ownership/assignment filter.
+- Các role này có edit_private_dealer_leads để chỉnh sửa lead có post_status private.
+- Dealer Sales và Shop Manager hiện xem được toàn bộ lead; chưa có ownership/assignment filter.
 
 ## 8. Bảo mật
 Không commit secrets. Production bắt buộc HTTPS, backup và cập nhật thường xuyên. Form có validate, consent, honeypot và rate limit. Cần chính sách quyền riêng tư trước khi thu lead thật.
