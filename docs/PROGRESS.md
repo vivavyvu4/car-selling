@@ -82,3 +82,5 @@ Commit tiếp theo sẽ chạy lại GitHub Actions cho các thay đổi mới.
 - Chưa có Docker daemon để chạy WordPress/WooCommerce end-to-end; chưa kiểm thử Laragon/XAMPP hoặc giao diện trình duyệt.
 - Ảnh trong repo là vector minh họa, không phải ảnh chụp xe thật.
 - Chính sách bảo mật là mẫu nội dung, cần rà soát trước khi thu thập dữ liệu thật.
+
+- Bổ sung template riêng cho trang nội dung và trang chi tiết bài viết để không phụ thuộc index fallback.
